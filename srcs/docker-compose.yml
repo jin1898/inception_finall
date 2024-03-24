@@ -1,0 +1,65 @@
+version: '3.7'
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+        # device: /Users/jsunwoo/born2code/inception/srcs/data/wordpress # 이 디렉토리는 각자 사용하는 디렉토리 절대경로로 할것 (클러스터 맥용)
+       device: /home/jsunwoo/data/wordpress
+      o: bind                     
+      type: none                         
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      # device: /Users/jsunwoo/born2code/inception/srcs/data/mariadb # 이 디렉토리는 각자 사용하는 디렉토리 절대경로로 할것 (클러스터 맥용)
+      device: /home/jsunwoo/data/mariadb
+      o: bind
+      type: none
+
+services:
+  mariadb:
+    container_name: my_mariadb
+    build: ./requirements/mariadb/.  
+    image: mariadb:42
+    volumes:
+      - mariadb:/var/lib/mysql
+    env_file:
+      - .env
+    networks:
+      - inception
+    restart: always
+  nginx:
+    container_name: my_nginx
+    build: ./requirements/nginx/.
+    image: nginx:42
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress  
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
+  wordpress:
+    container_name: my_wordpress
+    build: ./requirements/wordpress/.
+    image: wordpress:42
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
+
+networks:
+  inception:
+    name: inception
+    driver: bridge #TODO 고침
