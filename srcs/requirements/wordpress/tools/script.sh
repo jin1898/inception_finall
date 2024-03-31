@@ -17,7 +17,10 @@ wp config create --dbname=$DATABASE_NAME --dbuser=$DATABASE_USER --dbpass=$DATAB
 
 wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USER --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=$WORDPRESS_ADMIN_EMAIL --skip-email --allow-root
 
-wp user meta add $WORDPRESS_USER wp_capabilities '{"moderate_comments":true}'
+# 새 게시물에 대해 댓글 허용
+wp option update default_comment_status 'open' --allow-root
+# 댓글 자동 승인 설정 (0은 꺼짐을 의미함, 1은 켜짐을 의미함)
+wp option update comment_moderation 0 --allow-root
 
 wp user create $WORDPRESS_USER $WORDPRESS_EMAIL --role=author --user_pass=$WORDPRESS_PASWORD --allow-root
 
