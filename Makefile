@@ -3,10 +3,10 @@ all :
 	make up
 
 build :
-	@docker compose -f ./srcs/docker-compose.yml build
+	@docker compose -f ./srcs/docker-compose.yml build #make re 같은거
 
 up :
-	@docker compose -f ./srcs/docker-compose.yml up -d
+	@docker compose -f ./srcs/docker-compose.yml up -d #
 
 down :
 	@docker compose -f ./srcs/docker-compose.yml down
