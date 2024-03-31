@@ -5,8 +5,8 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $KEY_PATH -out $CERT
 echo "
 server
 {
-	listen 443 ssl; #443포트로만 듣도록 설정
-	ssl_protocols  TLSv1.3; #ssl인증서의 상위 버전인 TLS1.3을 사용하도록함. 
+	listen 443 ssl; # nginx가 443포트로만 듣도록 설정
+	ssl_protocols  TLSv1.3; # ssl인증서의 상위 버전인 TLS1.3을 사용하도록함. 
 
 	ssl_certificate $CERTIFICAT_PATH;
 	ssl_certificate_key $KEY_PATH;

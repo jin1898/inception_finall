@@ -21,10 +21,10 @@ volumes:
       type: none
 
 services:
-  mariadb:
+  mariadb: #서비스 이름 
     container_name: my_mariadb
     build: ./requirements/mariadb/.  
-    image: mariadb:42
+    image: mariadb:42 #이미지 이름이 서비스 이름이랑 동일해야함. 
     volumes:
       - mariadb:/var/lib/mysql
     env_file:
@@ -37,7 +37,7 @@ services:
     build: ./requirements/nginx/.
     image: nginx:42
     ports:
-      - "443:443"
+      - "443:443" #443포트로 접근가능한 유일한 입구 
     depends_on:
       - wordpress  
     volumes:
