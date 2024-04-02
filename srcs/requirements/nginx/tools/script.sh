@@ -1,6 +1,9 @@
 #!/bin/bash
 
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout $KEY_PATH -out $CERTIFICAT_PATH -subj "/C=KR/L=Seoul/O=42/OU=Development/CN=$DOMAIN_NAME"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+		-keyout $KEY_PATH \
+		-out $CERTIFICAT_PATH \
+		-subj "/C=KR/L=Seoul/O=42/OU=Development/CN=$DOMAIN_NAME"
 
 echo "
 server

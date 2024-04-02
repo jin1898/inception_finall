@@ -5,8 +5,6 @@ volumes:
     name: wordpress
     driver: local
     driver_opts:
-      # device: /Users/jsunwoo/born2code/inception/srcs/data/wordpress # 이 디렉토리는 각자 사용하는 디렉토리 절대경로로 할것 (클러스터 맥용)
-      # source: /home/jsunwoo/data/wordpress
       device: /home/jsunwoo/data/wordpress
       o: bind                     
       type: none                         
@@ -14,9 +12,7 @@ volumes:
     name: mariadb
     driver: local
     driver_opts:
-      # device: /Users/jsunwoo/born2code/inception/srcs/data/mariadb # 이 디렉토리는 각자 사용하는 디렉토리 절대경로로 할것 (클러스터 맥용)
       device: /home/jsunwoo/data/mariadb
-      # source: /home/jsunwoo/data/mariadb
       o: bind
       type: none
 
